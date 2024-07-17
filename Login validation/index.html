@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <div class="container mt-3">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-header text-white text-center">
+              <h5 className="card-title text-center mb-3">
+                <strong>Sign Up</strong>
+              </h5>
+            </div>
+            <div class="card-body font-weight-bold">
+              <form id="signupForm" class="needs-validation" novalidate>
+                <div class="form-group">
+                  <div class="row">
+                    <label for="username" class="col-md-4 col-form-label"
+                      >Username</label
+                    >
+                    <div class="col-md-8">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="username"
+                        required
+                      />
+                      <div class="invalid-feedback">Username is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <label for="password" class="col-md-4 col-form-label"
+                      >Password</label
+                    >
+                    <div class="col-md-8">
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="password"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <label for="confirmPassword" class="col-md-4 col-form-label"
+                      >Confirm Password</label
+                    >
+                    <div class="col-md-8">
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="confirmPassword"
+                        required
+                      />
+                      <div class="invalid-feedback">
+                        Please confirm your password
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <label for="email" class="col-md-4 col-form-label"
+                      >Email</label
+                    >
+                    <div class="col-md-8">
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        required
+                      />
+                      <div class="invalid-feedback">Invalid email address</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <label for="phoneNumber" class="col-md-4 col-form-label"
+                      >Phone Number</label
+                    >
+                    <div class="col-md-8">
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="phoneNumber"
+                        pattern="^\d{10}$"
+                        required
+                      />
+                      <div class="invalid-feedback">
+                        Phone number should be 10 digits
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <label for="address" class="col-md-4 col-form-label"
+                      >Address</label
+                    >
+                    <div class="col-md-8">
+                      <textarea
+                        class="form-control"
+                        id="address"
+                        rows="2"
+                        required
+                      ></textarea>
+                      <div class="invalid-feedback">Address is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <div class="row">
+                      <label for="age" class="col-md-4 col-form-label"
+                        >Age</label
+                      >
+                      <div class="col-md-8">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="age"
+                          pattern="^\d{2}$"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="invalid-feedback">Age should be 2 digits</div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <div class="row">
+                      <label for="gender" class="col-md-4 col-form-label"
+                        >Gender</label
+                      >
+                      <div class="col-md-8">
+                        <select class="form-control" id="gender" required>
+                          <option value=""></option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="invalid-feedback">Gender is required</div>
+                  </div>
+                </div>
+                <div></div>
+                <button type="submit" class="btn btn-danger text-white">
+                  Sign Up
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function randColor() {
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        return `rgb(${r},${g},${b})`;
+      }
+      setInterval(() => {
+        document.body.style.backgroundColor = randColor();
+      }, 100);
+      document.addEventListener("DOMContentLoaded", function () {
+        var form = document.getElementById("signupForm");
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          if (form.checkValidity() === false) {
+            form.classList.add("was-validated");
+
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Please fill all the required fields correctly!",
+            });
+          } else {
+            var password = document.getElementById("password").value;
+            var confirmPassword =
+              document.getElementById("confirmPassword").value;
+
+            var passwordPattern =
+              /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,10}$/;
+            var agePattern = /^\d{1,2}$/;
+
+            if (!passwordPattern.test(password)) {
+              Swal.fire({
+                title: "Error!",
+                text: "Password must be 6-10 characters long, contain at least one capital letter, and one special character.",
+                icon: "error",
+                confirmButtonText: "OK",
+              });
+              return;
+            }
+
+            if (password !== confirmPassword) {
+              document
+                .getElementById("confirmPassword")
+                .setCustomValidity("Passwords do not match");
+              form.classList.add("was-validated");
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Passwords do not match!",
+              });
+            } else {
+              document.getElementById("confirmPassword").setCustomValidity("");
+
+              Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: "Form submitted successfully!",
+              });
+
+              form.reset();
+              form.classList.remove("was-validated");
+            }
+          }
+        });
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

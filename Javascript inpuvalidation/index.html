@@ -6,7 +6,12 @@
     <title>Document</title>
   </head>
   <body>
-    <input type="text" id="num1" oninput="valInput(this)" />
+    <input
+      type="text"
+      id="num1"
+      oninput="this.value = this.value.replace(/[^0-9]/g,'')"
+    />
+    <!-- Another way to allow only inputs -->
     <input type="text" id="num2" oninput="valInput(this)" />
     <button onclick="mul() ">Multiply</button>
     <div id="res"></div>
@@ -16,7 +21,7 @@
         const integerPattern = /^-?\d*$/;
         if (!integerPattern.test(value)) {
           input.value = value.slice(0, -1);
-        }
+        } 
       }
       function mul() {
         const a = document.getElementById("num1").value;
